@@ -1,0 +1,22 @@
+- hosts: all
+  tasks:
+    - name: Debug environment variables
+      debug:
+        msg:
+          - "DOCKER_USERNAME: {{ lookup('env', 'DOCKER_USERNAME') }}"
+          - "DOCKER_PASSWORD: {{ lookup('env', 'DOCKER_PASSWORD') }}"
+
+    - name: Docker login
+      shell: echo "{{ lookup('env', 'DOCKER_PASSWORD') }}" | docker login --username "{{ lookup('env', 'DOCKER_USERNAME') }}" --password-stdin
+      environment:
+        DOCKER_USERNAME: "{{ lookup('env', 'DOCKER_USERNAME') }}"
+        DOCKER_PASSWORD: "{{ lookup('env', 'DOCKER_PASSWORD') }}"
+    - name: stop container
+      shell: docker container stop cloudknowledge-container
+    - name: remove container
+      shell: docker container rm cloudknowledge-container
+    - name: remove docker image
+      shell: docker image rmi balrajsi/cloudknowledge-job-singh
+    - name: Create new container
+      shell: docker container run -itd --name cloudknowledge-container -p 9000:80 balrajsi/cloudknowledge-job-singh
+
