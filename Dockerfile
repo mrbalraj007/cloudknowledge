@@ -1,4 +1,4 @@
-# Use the latest Nginx image
+# Use the latest Nginx image 
 FROM nginx:latest
 
 # Maintainer information
