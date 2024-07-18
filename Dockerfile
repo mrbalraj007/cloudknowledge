@@ -4,6 +4,11 @@ FROM nginx:latest
 # Maintainer information
 MAINTAINER x.y@gmail.com
 
+# Add and extract web content
+ADD https://freewebsitetemplates.com/preview/rehabilitation-yoga/ /usr/share/nginx/html/
+
+WORKDIR /usr/share/nginx/html/
+
 # Copy the HTML file to the web server directory
 COPY index.html /usr/share/nginx/html/index.html
 
