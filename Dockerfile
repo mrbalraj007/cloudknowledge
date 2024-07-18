@@ -1,18 +1,14 @@
-# Use the latest CentOS image
-FROM centos:latest
+# Use the latest Nginx image
+FROM nginx:latest
 
 # Maintainer information
 MAINTAINER x.y@gmail.com
 
-# Install necessary packages
-RUN yum install -y httpd && \
-    yum clean all
-
 # Copy the HTML file to the web server directory
-COPY index.html /var/www/html/index.html
+COPY index.html /usr/share/nginx/html/index.html
 
 # Expose port 80
 EXPOSE 80
 
-# Start the Apache HTTP server
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+# Start the Nginx server
+CMD ["nginx", "-g", "daemon off;"]
