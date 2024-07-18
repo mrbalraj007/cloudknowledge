@@ -1,17 +1,11 @@
-# Use the latest Nginx image 
+# Use the latest version of nginx from the official repository
 FROM nginx:latest
 
-# Maintainer information
-LABEL maintainer="x.y@gmail.com"
+# Copy the static website files to the nginx HTML directory
+COPY index.html /usr/share/nginx/html/
 
-# Set the working directory
-WORKDIR /usr/share/nginx/html/
-
-# Add the web content
-ADD https://freewebsitetemplates.com/preview/rehabilitation-yoga /usr/share/nginx/html/
-
-# Expose port 80
+# Expose port 80 to the outside world
 EXPOSE 80
 
-# Start the Nginx server
+# Start nginx when the container launches
 CMD ["nginx", "-g", "daemon off;"]
