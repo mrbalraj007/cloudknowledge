@@ -1,17 +1,18 @@
-FROM nginx:latest
+# Use the latest CentOS image
+FROM centos:latest
+
+# Maintainer information
 MAINTAINER x.y@gmail.com
 
 # Install necessary packages
-RUN yum install -y httpd zip unzip && \
+RUN yum install -y httpd && \
     yum clean all
 
-# Add and extract web content
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page291/drool.zip /var/www/html/
-WORKDIR /var/www/html
-RUN unzip drool.zip && \
-    cp -rvf drool-html/* . && \
-    rm -rf drool-html drool.zip
+# Copy the HTML file to the web server directory
+COPY index.html /var/www/html/
 
-# Expose port and run Apache HTTP server
+# Expose port 80
 EXPOSE 80
+
+# Start the Apache HTTP server
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
