@@ -8,12 +8,8 @@ RUN yum update -y && \
     rm -rf /var/cache/yum
 
 # Add and extract web content
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page291/drool.zip /var/www/html/
+ADD https://freewebsitetemplates.com/preview/rehabilitation-yoga/ /var/www/html/
 WORKDIR /var/www/html
-RUN unzip drool.zip && \
-    cp -rvf drool-html/* . && \
-    rm -rf drool-html drool.zip
-
 # Expose port and run Apache HTTP server
 EXPOSE 80
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
