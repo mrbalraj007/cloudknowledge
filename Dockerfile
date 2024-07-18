@@ -10,7 +10,7 @@ ADD https://freewebsitetemplates.com/preview/rehabilitation-yoga/ /usr/share/ngi
 WORKDIR /usr/share/nginx/html/
 
 # Copy the HTML file to the web server directory
-# COPY index.html /usr/share/nginx/html/index.html
+COPY index.html /usr/share/nginx/html/index.html
 
 # Expose port 80
 EXPOSE 80
